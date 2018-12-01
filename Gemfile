@@ -68,3 +68,5 @@ gem 'pg'
 # 后台界面
 gem 'activeadmin'
 gem 'devise'
+# 用户访问权限
+gem 'cancancan', '~> 2.0'

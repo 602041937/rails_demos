@@ -1,4 +1,3 @@
 class ApplicationController < ActionController::Base
-  # 修改了master的bug
-  # #222
+  protect_from_forgery
 end
