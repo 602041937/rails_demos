@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+git_source(:github) {|repo| "https://github.com/#{repo}.git"}
 
 ruby '2.4.0'
 
@@ -60,3 +60,11 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+# 以上都是自己生成,以下都是自己生成
+
+gem 'pg'
+# 后台界面
+gem 'activeadmin'
+gem 'devise'
