@@ -1,0 +1,5 @@
+<%= form_for @user, url: {action: "deal_login"} do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_field :password %>
+  <%= submit_tag 'login' %>
+<% end %>

@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   def access_denied
     redirect_to admin_root_path, alert: "您没有权限访问！"
   end
+
+  def index
+    render html: "index页面"
+  end
 end

@@ -72,3 +72,6 @@ gem 'devise'
 gem 'cancancan', '~> 2.0'
 # 用户访问角色权限配置
 gem 'role_core'
+
+# oauth
+gem 'doorkeeper'
