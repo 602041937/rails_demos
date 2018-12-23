@@ -72,3 +72,11 @@ gem 'devise'
 gem 'cancancan', '~> 2.0'
 # 用户访问角色权限配置
 gem 'role_core'
+
+
+group :development do
+  gem 'capistrano', '3.11.0'
+  gem 'capistrano-rvm', '0.1.2'
+  gem 'capistrano-rails', '1.4.0'
+  gem 'capistrano3-puma', '3.1.1'
+end
