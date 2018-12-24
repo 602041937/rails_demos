@@ -43,3 +43,15 @@ append :linked_files, "config/database.yml", "config/master.key"
 set :rvm_type, :user
 set :rvm_ruby_version, '2.4.0'
 
+namespace :deploy do
+  namespace :check do
+    desc 'Create Directories for Pid, Log and Socket'
+    task :make_pid_log_and_socket_dirs do
+      on roles(:all) do
+        execute "mkdir -p #{shared_path}/tmp/sockets"
+        execute "mkdir -p #{shared_path}/tmp/pids"
+        execute "mkdir -p #{shared_path}/log"
+      end
+    end
+  end
+end
