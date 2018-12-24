@@ -22,7 +22,7 @@ set :pty, true
 
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml"
-append :linked_files, "config/master.key"
+append :linked_files, "config/database.yml", "config/master.key"
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
@@ -40,6 +40,6 @@ append :linked_files, "config/master.key"
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
-set :rvm_type, :system
+set :rvm_type, :user
 set :rvm_ruby_version, '2.4.0'
 

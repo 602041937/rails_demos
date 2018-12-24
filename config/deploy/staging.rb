@@ -63,7 +63,7 @@
 
 server '106.12.127.211', user: 'deploy', roles: %w{app db web}
 set :deploy_to, "/home/deploy/demo/#{fetch(:rails_env)}"
-set :branch, :master
+set :branch, :capistrano
 set :stage, :staging
 set :ssh_options, {
     keys: %w(/home/deploy/.ssh/authorized_keys),
