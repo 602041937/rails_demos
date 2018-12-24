@@ -5,7 +5,7 @@ require "capistrano/setup"
 require "capistrano/deploy"
 
 # 预编译
-# require 'capistrano/local_precompile'
+require 'capistrano/local_precompile'
 
 # 配置Capfile
 require "capistrano/rvm"

@@ -30,6 +30,10 @@ append :linked_files, "config/database.yml", "config/master.key"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
+set :default_env, {
+    "PATH" => "/home/ubuntu/.nvm/versions/node/v10.6.0/bin:$PATH"
+}
+
 
 # Default value for local_user is ENV['USER']
 # set :local_user, -> { `git config user.name`.chomp }
@@ -53,5 +57,6 @@ namespace :deploy do
         execute "mkdir -p #{shared_path}/log"
       end
     end
+    after :make_linked_dirs, :make_pid_log_and_socket_dirs
   end
 end
