@@ -47,6 +47,10 @@ set :default_env, {
 set :rvm_type, :user
 set :rvm_ruby_version, '2.4.0'
 
+set :nvm_type, :user # or :system, depends on your nvm setup
+set :nvm_node, 'v10.6.0'
+set :nvm_map_bins, %w{node npm yarn}
+
 namespace :deploy do
   namespace :check do
     desc 'Create Directories for Pid, Log and Socket'
