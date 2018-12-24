@@ -7,6 +7,8 @@ require "capistrano/deploy"
 # 预编译
 require 'capistrano/local_precompile'
 
+require 'capistrano/nvm'
+
 # 配置Capfile
 require "capistrano/rvm"
 require 'capistrano/rails'

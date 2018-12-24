@@ -81,5 +81,6 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano3-puma'
   gem 'capistrano-local-precompile', '~> 1.1.3', require: false
+  gem 'capistrano-nvm', require: false
   gem 'sshkit-sudo'
 end
