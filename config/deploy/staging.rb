@@ -21,7 +21,6 @@
 # role :db,  %w{deploy@example.com}
 
 
-
 # Configuration
 # =============
 # You can set any configuration variable like in config/deploy.rb
@@ -29,7 +28,6 @@
 # For available Capistrano configuration variables see the documentation page.
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
-
 
 
 # Custom SSH Options
@@ -60,10 +58,9 @@
 #   }
 
 
-
 server '106.12.127.211', user: 'deploy', roles: %w{app db web}
 set :deploy_to, "/home/deploy/demo/#{fetch(:rails_env)}"
-set :branch, :capistrano
+set :branch, :master
 set :stage, :staging
 set :ssh_options, {
     keys: %w(/home/deploy/.ssh/authorized_keys),
