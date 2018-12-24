@@ -79,6 +79,7 @@ group :development do
   gem 'capistrano-rvm', '0.1.2'
   gem 'capistrano-rails', '1.4.0'
   gem 'capistrano-bundler'
-  gem 'capistrano3-puma', github: "seuros/capistrano-puma"
+  gem 'capistrano3-puma'
+  gem 'capistrano-local-precompile', '~> 1.1.3', require: false
   gem 'sshkit-sudo'
 end

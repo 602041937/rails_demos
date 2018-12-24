@@ -4,6 +4,9 @@ require "capistrano/setup"
 # Include default deployment tasks
 require "capistrano/deploy"
 
+# 预编译
+require 'capistrano/local_precompile'
+
 # 配置Capfile
 require "capistrano/rvm"
 require 'capistrano/rails'
