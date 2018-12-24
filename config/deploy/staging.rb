@@ -66,3 +66,4 @@ set :ssh_options, {
     keys: %w(/home/deploy/.ssh/authorized_keys),
     auth_methods: %w(publickey)
 }
+
