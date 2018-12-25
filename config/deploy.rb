@@ -3,7 +3,7 @@ lock "~> 3.11.0"
 
 set :application, "hpd_demos"  ## demo 换成你的项目名
 set :repo_url, "https://github.com/602041937/rails_demos.git" ## 这里写上项目代码的托管地址
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "public/uploads", "vendor/bundle"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "public/uploads", "vendor/bundle",".bundle"
 append :linked_files, "config/database.yml", "config/master.key"
 
 set :rvm_type, :user
