@@ -1,3 +1,9 @@
+# Load DSL and set up stages
+require "capistrano/setup"
+
+# Include default deployment tasks
+require "capistrano/deploy"
+
 # 添加
 require "capistrano/rvm"
 require 'capistrano/rails'
@@ -5,12 +11,6 @@ require 'capistrano/puma'
 require 'capistrano/puma/nginx'
 install_plugin Capistrano::Puma
 install_plugin Capistrano::Puma::Nginx
-
-# Load DSL and set up stages
-require "capistrano/setup"
-
-# Include default deployment tasks
-require "capistrano/deploy"
 
 # Load the SCM plugin appropriate to your project:
 #
