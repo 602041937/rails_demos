@@ -74,8 +74,10 @@ gem 'cancancan', '~> 2.0'
 gem 'role_core'
 
 group :development do
-  gem 'capistrano','3.11.0'
+  gem 'capistrano', '3.11.0'
   gem 'capistrano-rvm', '0.1.2'
-  gem 'capistrano-rails','1.4.0'
+  gem 'capistrano-rails', '1.4.0'
   gem 'capistrano3-puma', '3.1.1'
+  gem 'capistrano-bundler'
+  gem 'sshkit-sudo' #cap staging puma:nginx_config 出现错误
 end
