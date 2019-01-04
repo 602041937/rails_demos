@@ -211,3 +211,24 @@ end
 #   add_part23_questions i, '2019年1-4月'
 #   puts "process #{i}"
 # end
+
+# add_part1_questions 50,'2019年1-4月'
+# puts "50"
+# add_part1_questions 51,'2019年1-4月'
+# puts "51"
+# add_part1_questions 52,'2019年1-4月'
+# puts "52"
+# add_part1_questions 53,'2019年1-4月'
+# puts "53"
+# add_part1_questions 54,'2019年1-4月'
+# puts "54"
+# add_part1_questions 55,'2019年1-4月'
+# puts "55"
+# add_part1_questions 56,'2019年1-4月'
+# puts "56"
+# add_part1_questions 57,'2019年1-4月'
+# puts "57"
+# add_part1_questions 59,'2019年1-4月'
+# puts "59"
+# add_part1_questions 58, '2019年1-4月'
+# puts "process 58"
