@@ -206,3 +206,8 @@ end
 # puts 'process 89'
 # add_part1_questions 49, '2019年1-4月'
 # puts 'process 49'
+
+# for i in 90..113 do
+#   add_part23_questions i, '2019年1-4月'
+#   puts "process #{i}"
+# end
