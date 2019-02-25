@@ -232,3 +232,48 @@ end
 # puts "59"
 # add_part1_questions 58, '2019年1-4月'
 # puts "process 58"
+#
+#
+
+def add_part1_exist_topic_questions exist_topic_id, part1_id, questions_ids, tags
+
+  pc_connection = PG.connect :host => 'rm-wz955u729m2b7e039go.pg.rds.aliyuncs.com', :port => 3432, :dbname => 'hcp-question-bank', :user => 'qiushi', :password => 'HcpGo2018'
+  app_connection = PG.connect :host => 'rm-2zeyu6ov54144fq5co.pg.rds.aliyuncs.com', :port => 3432, :dbname => 'ieltsbrov6_production_psql', :user => 'qiushi', :password => 'HCP80128!@#'
+
+  insert_part1_question_statement = <<SQL
+insert into "public"."app_oral_practice_questions" ( "app_part1_topic_id", "app_part23_topic_id", "topic", "description", "created_at", "updated_at", "is_show", "comment_count", "vu", "uu", "question_order", "part_num", "audio_file", "answer_explain", "sequence", "duration", "bank_uuid", "bank_table_name", "last_sync_pc_time", "collectionable_count") values ( $1, null, $2, $3, $4, $5, 't', '0', '', '', $13, $6, $7, $8, null, $9, $10, $11, $12, '0') RETURNING *;
+SQL
+
+  app_connection.prepare 'create_part1_question', insert_part1_question_statement
+
+  part1_questions = questions_ids.map {|id| pc_connection.exec("select * from oral_one_questions where id = #{id}").first}
+
+  #插入Part1Question
+
+  exist_topic = app_connection.exec("select * from app_part1_topics where id = #{exist_topic_id}").first
+  topic = exist_topic.topic
+
+  part1_questions.each_with_index do |part1_question, index|
+    exist_topic_id
+    topic
+    description = remove_html(part1_question['question']).gsub(/\r/, '').gsub(/\n\n/, "\n")
+    created_at = Time.now
+    updated_at = Time.now
+    part_num = 1
+    audio_file = get_audio_url 'oral_one_questions', part1_question['id'], part1_question['audio_file']
+    answer_explain = part1_question['answer_explain']
+    duration = get_duration audio_file
+    bank_uuid = part1_question['id']
+    bank_table_name = 'oral_one_questions'
+    last_sync_pc_time = Time.now
+    sequence = index + 1
+    part1_question_result = app_connection.exec_prepared 'create_part1_question', [exist_topic_id, topic, description, created_at, updated_at, part_num, audio_file, answer_explain, duration, bank_uuid, bank_table_name, last_sync_pc_time, sequence]
+    p part1_question_result
+  end
+#显示topic
+# app_connection.exec "update app_part1_topics set is_show = true, is_show_tab2 = true, is_sleep = false where id =#{topic_id}"
+  pc_connection.close
+  app_connection.close
+end
+
+# add_part1_exist_topic_questions 201, 60, [307, 308], "2019年1-4月"
