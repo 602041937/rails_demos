@@ -67,11 +67,15 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'pg'
 # 后台界面
 gem 'activeadmin'
+gem 'arctic_admin'
 gem 'devise'
 # 用户访问权限
 gem 'cancancan', '~> 2.0'
 # 用户访问角色权限配置
 gem 'role_core'
+
+gem 'sidekiq'
+gem 'redis'
 
 group :development do
   gem 'capistrano', '3.11.0'
