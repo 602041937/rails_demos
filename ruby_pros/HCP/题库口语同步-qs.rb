@@ -235,6 +235,17 @@ end
 #
 #
 
+# for i in 129..138 do
+#   add_part23_questions i, '2019年5-8月'
+#   puts "process #{i}"
+# end
+
+# add_part23_questions 139, '2019年5-8月'
+
+# add_part1_questions 74, '2019年5-8月'
+
+# add_part23_questions 140, '2019年5-8月'
+
 def add_part1_exist_topic_questions exist_topic_id, part1_id, questions_ids, tags
 
   pc_connection = PG.connect :host => 'rm-wz955u729m2b7e039go.pg.rds.aliyuncs.com', :port => 3432, :dbname => 'hcp-question-bank', :user => 'qiushi', :password => 'HcpGo2018'
@@ -276,4 +287,97 @@ SQL
   app_connection.close
 end
 
+def add_part23_exist_topic_questions exist_topic_id, questions_ids, tags
+
+  pc_connection = PG.connect :host => 'rm-wz955u729m2b7e039go.pg.rds.aliyuncs.com', :port => 3432, :dbname => 'hcp-question-bank', :user => 'qiushi', :password => 'HcpGo2018'
+  app_connection = PG.connect :host => 'rm-2zeyu6ov54144fq5co.pg.rds.aliyuncs.com', :port => 3432, :dbname => 'ieltsbrov6_production_psql', :user => 'qiushi', :password => 'HCP80128!@#'
+
+  insert_part1_question_statement = <<SQL
+insert into "public"."app_oral_practice_questions" ( "app_part1_topic_id", "app_part23_topic_id", "topic", "description", "created_at", "updated_at", "is_show", "comment_count", "vu", "uu", "question_order", "part_num", "audio_file", "answer_explain", "sequence", "duration", "bank_uuid", "bank_table_name", "last_sync_pc_time", "collectionable_count") values ( null,$1 , $2, $3, $4, $5, 't', '0', '', '', $13, $6, $7, $8, null, $9, $10, $11, $12, '0') RETURNING *;
+SQL
+
+  app_connection.prepare 'create_part23_question', insert_part1_question_statement
+
+  part1_questions = questions_ids.map {|id| pc_connection.exec("select * from oral_three_questions where id = #{id}").first}
+
+  #插入Part1Question
+
+  exist_topic = app_connection.exec("select * from app_part23_topics where id = #{exist_topic_id}").first
+  topic = exist_topic.topic
+
+  part1_questions.each_with_index do |part23_question, index|
+    exist_topic_id
+    topic
+    description = remove_html(part23_question['question']).gsub(/\r/, '').gsub(/\n\n/, "\n")
+    created_at = Time.now
+    updated_at = Time.now
+    part_num = 3
+    audio_file = get_audio_url 'oral_three_questions', part23_question['id'], part23_question['audio_file']
+    answer_explain = part23_question['answer_explain']
+    duration = get_duration audio_file
+    bank_uuid = part23_question['id']
+    bank_table_name = 'oral_three_questions'
+    last_sync_pc_time = Time.now
+    sequence = index + 1
+    part1_question_result = app_connection.exec_prepared 'create_part23_question', [exist_topic_id, topic, description, created_at, updated_at, part_num, audio_file, answer_explain, duration, bank_uuid, bank_table_name, last_sync_pc_time, sequence]
+    p part1_question_result
+  end
+  #显示topic
+  # app_connection.exec "update app_part1_topics set is_show = true, is_show_tab2 = true, is_sleep = false where id =#{topic_id}"
+  pc_connection.close
+  app_connection.close
+end
+
+
+
 # add_part1_exist_topic_questions 201, 60, [307, 308], "2019年1-4月"
+
+# add_part23_exist_topic_questions 642, [1430], "2019年5-8月"
+#  add_part23_exist_topic_questions 676, [1433], "2019年5-8月"
+
+
+
+#  改变part1的tag
+def change_topic1_tags ids, new_tag
+
+  pc_connection = PG.connect :host => 'rm-wz955u729m2b7e039go.pg.rds.aliyuncs.com', :port => 3432, :dbname => 'hcp-question-bank', :user => 'qiushi', :password => 'HcpGo2018'
+  app_connection = PG.connect :host => 'rm-2zeyu6ov54144fq5co.pg.rds.aliyuncs.com', :port => 3432, :dbname => 'ieltsbrov6_production_psql', :user => 'qiushi', :password => 'HCP80128!@#'
+
+  ids.each do |id|
+    first = pc_connection.exec("select name from oral_ones where id=#{id}").first
+    if first != nil
+      name = first.name
+      p name
+      result = app_connection.exec("update app_part1_topics set tags='#{new_tag}' where topic='#{name}'")
+      if result.cmd_tuples == 0
+        p "id=#{id}===name=#{name} 更新失败"
+      end
+    end
+    pc_connection.close
+    app_connection.close
+  end
+end
+
+#  改变part23的tag
+def change_topic23_tags ids, new_tag
+
+  pc_connection = PG.connect :host => 'rm-wz955u729m2b7e039go.pg.rds.aliyuncs.com', :port => 3432, :dbname => 'hcp-question-bank', :user => 'qiushi', :password => 'HcpGo2018'
+  app_connection = PG.connect :host => 'rm-2zeyu6ov54144fq5co.pg.rds.aliyuncs.com', :port => 3432, :dbname => 'ieltsbrov6_production_psql', :user => 'qiushi', :password => 'HCP80128!@#'
+
+  ids.each do |id|
+    first = pc_connection.exec("select name from oral_twos where id=#{id}").first
+    if first != nil
+      name = first.name
+      p name
+      result = app_connection.exec("update app_part23_topics set tags='#{new_tag}' where topic='#{name}'")
+      if result.cmd_tuples == 0
+        p "id=#{id}===name=#{name} 更新失败"
+      end
+    end
+    pc_connection.close
+    app_connection.close
+  end
+end
+
+# change_topic1_tags [40],"2019年1-4月"
+
