@@ -1,0 +1,2 @@
+class YouZanOrder < ApplicationRecord
+end

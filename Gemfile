@@ -74,3 +74,5 @@ gem 'cancancan', '~> 2.0'
 gem 'role_core'
 
 gem 'ruby-audioinfo'
+
+gem 'rest-client'

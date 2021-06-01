@@ -97,7 +97,7 @@ RoleCore.permission_set_class.draw do
     # end
 
     # 这里是简便的写法
-    %w(user admin_user role).each do |item|
+    %w(user admin_user role you_zan_order).each do |item|
       group item.to_sym, model_name: "#{item.camelcase}" do
         permission :create
         permission :destroy
